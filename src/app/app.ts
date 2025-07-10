@@ -67,20 +67,14 @@ export class App {
   }
 
   saveAnnotations() {
-    // Отправить на сервер или сохранить локально
+    console.log(this.imageUrl, ...this.annotations.map(a=> a.text));
   };
 
-  loadAnnotations(annotations: Annotation[]) {
-    this.annotations = annotations;
-  };
-
-  // Увеличить масштаб
   zoomIn() {
     this.zoomLevel += 10;
     this.zoomScale += this.zoomStep;
   }
 
-  // Уменьшить масштаб
   zoomOut() {
     if (this.zoomLevel > 30) { // Минимальный масштаб 30%
       this.zoomLevel -= 10;
@@ -88,7 +82,6 @@ export class App {
     }
   }
 
-  // Сбросить масштаб
   resetZoom() {
     this.zoomLevel = 100;
     this.zoomScale = 1.0;
