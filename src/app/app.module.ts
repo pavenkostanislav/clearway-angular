@@ -1,30 +1,25 @@
 import { NgModule, provideBrowserGlobalErrorListeners } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
-
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatButtonModule } from '@angular/material/button';
-import { MatInputModule } from '@angular/material/input';
-import { MatIconModule } from '@angular/material/icon';
+import { HttpClientModule } from '@angular/common/http';
 
 import { App } from './app';
 import { SafePipe } from './safe.pipe';
+import { AppRoutingModule } from './app-routing.module';
+import { NotFound } from './not-found/not-found';
 
 
 @NgModule({
   declarations: [
-    App
+    App,
+    NotFound
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    FormsModule,
-    MatButtonModule,
-    MatInputModule,
-    MatIconModule,
-    MatFormFieldModule,
-    SafePipe
+    SafePipe,
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [
     provideBrowserGlobalErrorListeners()

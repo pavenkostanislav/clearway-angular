@@ -1,0 +1,75 @@
+$error-bg: #fefefe;
+$error-border: #e0e0e0;
+$primary-color: #3498db;
+$text-color: #333;
+
+.error-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: linear-gradient(to right, #f1f1f1, #e0e0e0);
+  padding: 20px;
+}
+
+.error-card {
+  background-color: $error-bg;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  max-width: 450px;
+  width: 100%;
+  text-align: center;
+  animation: fadeIn 1s ease-in-out;
+
+  @media (max-width: 500px) {
+    padding: 30px 20px;
+  }
+}
+
+.icon {
+  font-size: 60px;
+  color: #999;
+  margin-bottom: 20px;
+}
+
+.error-code {
+  font-size: 96px;
+  color: #e74c3c;
+  margin: 0;
+  font-weight: 700;
+}
+
+.error-text {
+  font-size: 18px;
+  color: $text-color;
+  margin: 20px 0;
+}
+
+.back-button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  color: #fff;
+  background-color: $primary-color;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
