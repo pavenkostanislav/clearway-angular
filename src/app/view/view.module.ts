@@ -9,6 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { ViewRoutingModule } from './view-routing.module';
 import { View } from './view';
+import { AutoFocusDirective } from '../app-auto-focus.directive';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { View } from './view';
     MatFormFieldModule,
 
     ViewRoutingModule,
+    AutoFocusDirective
   ]
 })
 export class ViewModule { }

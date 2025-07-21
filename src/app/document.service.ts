@@ -16,7 +16,7 @@ export interface DocumentData {
     providedIn: 'root'
 })
 export class DocumentService {
-  private readonly docUrl = 'assets/1.json';
+  private readonly docUrl = '/assets/1.json';
 
   constructor(private http: HttpClient) {}
 

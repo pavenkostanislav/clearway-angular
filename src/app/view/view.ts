@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
@@ -9,7 +9,6 @@ interface Annotation {
   text: string;
   position: { x: number; y: number };
   createdAt: Date;
-  color?: string;
 }
 
 @Component({
@@ -21,7 +20,7 @@ interface Annotation {
 })
 export class View implements OnInit {
   document!: DocumentData;
-  currentPage!: Page;
+  currentPage: Page = { number: 1, imageUrl: 'pages/1.png' };
   @ViewChild('imageContainer') imageContainer!: ElementRef;
 
   zoomLevel = 100; // масштаба в %
@@ -33,20 +32,22 @@ export class View implements OnInit {
   newAnnotationText = '';
   isAddingAnnotation = false;
   currentPosition = { x: 0, y: 0 };
-  colors = ['#FF5733', '#33FF57', '#3357FF', '#F3FF33', '#FF33F3'];
-  selectedColor = this.colors[0];
 
   constructor(
     private route: ActivatedRoute,
+    private cdr: ChangeDetectorRef,
     private documentService: DocumentService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
-    this.documentService.getDocument().subscribe(data => {
+    this.documentService.getDocument().subscribe((data: DocumentData) => {
+      if (!data) return;
+
       this.document = data;
 
       const pageId = +this.route.snapshot.paramMap.get('id')!;
       this.currentPage = this.document.pages.find(p => p.number === pageId)!;
+      this.cdr.detectChanges();
     });
   }
 
@@ -65,8 +66,7 @@ export class View implements OnInit {
         id: Date.now().toString(),
         text: this.newAnnotationText,
         position: { ...this.currentPosition },
-        createdAt: new Date(),
-        color: this.selectedColor
+        createdAt: new Date()
       });
       this.cancelAddAnnotation();
     }
@@ -86,7 +86,7 @@ export class View implements OnInit {
   }
 
   saveAnnotations() {
-    console.log(this.currentPage.imageUrl, ...this.annotations.map(a=> a.text));
+    console.log(this.currentPage.imageUrl, ...this.annotations.map(a => a.text));
   };
 
   zoomIn() {

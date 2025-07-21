@@ -1,4 +1,4 @@
-<h2>{{ document.name }}</h2>
+<h2 [innerText]="document.name"></h2>
 
 <div class="document-controls">
 
@@ -14,33 +14,21 @@
 
 <div class="document-container">
     <div class="image-container" #imageContainer (click)="startAddAnnotation($event)">
-        <img [src]="'/assets/' + currentPage.imageUrl" [alt]="'Page ' + currentPage.number" [style.transform]="'scale(' + zoomScale + ')'">
+        <img *ngFor="let page of document.pages" [src]="'/assets/' + page.imageUrl" [alt]="'Page ' + page.number" [style.transform]="'scale(' + zoomScale + ')'">
 
         <!-- Аннотации -->
         <div *ngFor="let annotation of annotations; trackBy: trackByAnnotationId" class="annotation"
-            [style.left.px]="annotation.position.x" [style.top.px]="annotation.position.y"
-            [style.background]="annotation.color">
+            [style.left.px]="annotation.position.x" [style.top.px]="annotation.position.y">
             <div class="annotation-text">{{ annotation.text }}</div>
-            <button mat-icon-button class="delete-btn"
-                (click)="deleteAnnotation(annotation.id); $event.stopPropagation()">
-                <mat-icon>close</mat-icon>
+            <button matMiniFab class="delete-btn" (click)="deleteAnnotation(annotation.id); $event.stopPropagation()">
+                <mat-icon aria-hidden="false" aria-label="close" fontIcon="close"></mat-icon>
             </button>
         </div>
 
-        <!-- Форма добавления аннотации -->
-        <div *ngIf="isAddingAnnotation" class="annotation-form" [style.left.px]="currentPosition.x"
-            [style.top.px]="currentPosition.y">
-            <mat-form-field appearance="fill">
-                <textarea matInput [(ngModel)]="newAnnotationText" placeholder="Введите аннотацию"></textarea>
-            </mat-form-field>
-            <div class="color-picker">
-                <div *ngFor="let color of colors" class="color-option" [style.background]="color"
-                    [class.selected]="color === selectedColor" (click)="selectedColor = color"></div>
-            </div>
-            <div class="form-actions">
-                <button mat-button (click)="cancelAddAnnotation()">Отмена</button>
-                <button mat-raised-button color="primary" (click)="addAnnotation()">Добавить</button>
-            </div>
+        <!-- Новая аннотация -->
+        <div *ngIf="isAddingAnnotation" class="annotation-form"
+            [style.left.px]="currentPosition.x" [style.top.px]="currentPosition.y">
+            <input matInput appAutoFocus [(ngModel)]="newAnnotationText" maxlength="21" placeholder="Введите аннотацию" (keydown.enter)="addAnnotation()" />
         </div>
     </div>
-</div>
+</div>  
