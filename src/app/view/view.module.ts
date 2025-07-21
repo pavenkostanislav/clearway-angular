@@ -6,6 +6,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { ViewRoutingModule } from './view-routing.module';
 import { View } from './view';
@@ -24,6 +25,7 @@ import { AutoFocusDirective } from '../app-auto-focus.directive';
     MatInputModule,
     MatIconModule,
     MatFormFieldModule,
+    MatToolbarModule,
 
     ViewRoutingModule,
     AutoFocusDirective

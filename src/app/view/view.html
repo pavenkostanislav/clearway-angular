@@ -1,20 +1,22 @@
-<h2 [innerText]="document.name"></h2>
+<mat-toolbar color="primary" class="menu">
+    <span [innerText]="document.name"></span>
 
-<div class="document-controls">
-
-    <button mat-button (click)="saveAnnotations()" title="Сохранить">Сохранить</button>
-    <button mat-icon-button (click)="zoomIn()" title="Увеличить">
-        <mat-icon>add</mat-icon>
-    </button>
-    <button mat-icon-button (click)="zoomOut()" title="Уменьшить">
-        <mat-icon>remove</mat-icon>
-    </button>
-    <span class="zoom-level">{{ zoomLevel }}%</span>
-</div>
+    <div class="menu-items">
+        <span class="zoom-level" [innerText]="zoomLevel"></span>
+        <button matMiniFab (click)="zoomIn()" title="Увеличить масштаб">
+            <mat-icon>add</mat-icon>
+        </button>
+        <button matMiniFab (click)="zoomOut()" title="Уменьшить масштаб">
+            <mat-icon>remove</mat-icon>
+        </button>
+        <button matButton="tonal" (click)="saveAnnotations()" title="Сохранить">Save</button>
+    </div>
+</mat-toolbar>
 
 <div class="document-container">
     <div class="image-container" #imageContainer (click)="startAddAnnotation($event)">
-        <img *ngFor="let page of document.pages" [src]="'/assets/' + page.imageUrl" [alt]="'Page ' + page.number" [style.transform]="'scale(' + zoomScale + ')'">
+        <img *ngFor="let page of document.pages" [src]="'/assets/' + page.imageUrl" [alt]="'Page ' + page.number"
+            [style.transform]="'scale(' + zoomScale + ')'">
 
         <!-- Аннотации -->
         <div *ngFor="let annotation of annotations; trackBy: trackByAnnotationId" class="annotation"
@@ -26,9 +28,10 @@
         </div>
 
         <!-- Новая аннотация -->
-        <div *ngIf="isAddingAnnotation" class="annotation-form"
-            [style.left.px]="currentPosition.x" [style.top.px]="currentPosition.y">
-            <input matInput appAutoFocus [(ngModel)]="newAnnotationText" maxlength="21" placeholder="Введите аннотацию" (keydown.enter)="addAnnotation()" />
+        <div *ngIf="isAddingAnnotation" class="annotation-form" [style.left.px]="currentPosition.x"
+            [style.top.px]="currentPosition.y">
+            <input matInput appAutoFocus [(ngModel)]="newAnnotationText" maxlength="21" placeholder="Введите аннотацию"
+                (keydown.enter)="addAnnotation()" />
         </div>
     </div>
-</div>  
+</div>
