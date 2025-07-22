@@ -1,24 +1,21 @@
-import { HttpClient } from '@angular/common/http';
-
 import { Injectable } from '@angular/core';
 import {
   Resolve,
   ActivatedRouteSnapshot,
-  RouterStateSnapshot,
   Router
 } from '@angular/router';
 import { of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { DocumentData } from './types';
+import { DocumentService } from './document.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DocumentResolver implements Resolve<any> {
   constructor(
-    private router: Router,
-    private http: HttpClient
+    private documentService: DocumentService,
+    private router: Router
   ) { }
 
   resolve(route: ActivatedRouteSnapshot) {
@@ -29,7 +26,7 @@ export class DocumentResolver implements Resolve<any> {
       return of(null);
     }
 
-    return this.http.get<DocumentData>(`/assets/${docId}.json`).pipe(
+    return this.documentService.getDocument(docId).pipe(
       catchError((error) => {
         console.error('Error loading document:', error);
         this.redirectTo404();
