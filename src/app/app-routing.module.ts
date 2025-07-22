@@ -4,6 +4,10 @@ import { NotFound } from './not-found/not-found';
 
 const routes: Routes = [
   {
+    path: '404',
+    component: NotFound
+  },
+  {
     path: 'viewer/view',
     loadChildren: () => import('./view/view.module').then(m => m.ViewModule)
   },
@@ -14,7 +18,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    component: NotFound
+    redirectTo: '/404'
   }
 ];
 
