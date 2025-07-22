@@ -3,7 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { DocumentService, Page, DocumentData, Annotation } from '../document.service';
+import { Page, DocumentData, Annotation } from '../types';
 
 
 
@@ -25,17 +25,14 @@ export class View implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private cdr: ChangeDetectorRef,
-    private documentService: DocumentService
+    private cdr: ChangeDetectorRef
   ) { }
 
-  ngOnInit(): void {
-    this.documentService.getDocument().subscribe((data: DocumentData) => {
-      if (!data) return;
-
-      this.document = data;
-      this.newDocument = data;
-      //const pageId = +this.route.snapshot.paramMap.get('id')!;
+  ngOnInit() {
+    this.route.data.subscribe((data: any) => {
+      console.log(data)
+      this.document = data.documentData;
+      this.newDocument = data.documentData;
       this.cdr.detectChanges();
     });
   }

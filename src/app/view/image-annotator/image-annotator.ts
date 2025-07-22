@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter, ViewChild, ElementRef, ChangeDe
 import { FormsModule } from '@angular/forms';
 import { MatToolbarModule } from '@angular/material/toolbar';
 
-import { Page, DocumentData } from '../../document.service';
+import { Page, DocumentData } from '../../types';
 
 interface Annotation {
   id: string;

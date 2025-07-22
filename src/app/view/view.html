@@ -13,5 +13,6 @@
     </div>
 </mat-toolbar>
 
-<app-image-annotator *ngFor="let page of document.pages" [currentPage]="page" [zoomScale]="zoomScale" (annotationChanged)="annotation($event)">
+<app-image-annotator *ngFor="let page of document.pages" [currentPage]="page" [zoomScale]="zoomScale"
+    (annotationChanged)="annotation($event)">
 </app-image-annotator>
