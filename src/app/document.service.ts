@@ -2,9 +2,17 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
+export interface Annotation {
+  id: string;
+  text: string;
+  position: { x: number; y: number };
+  createdAt: Date;
+}
+
 export interface Page {
   number: number;
   imageUrl: string;
+  annotations?: Annotation[]
 }
 
 export interface DocumentData {

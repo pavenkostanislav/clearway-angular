@@ -1,0 +1,21 @@
+<div class="document-container">
+    <div class="image-container" #imageContainer (click)="startAddAnnotation($event)" [style.transform]="'scale(' + zoomScale + ')'">
+        <img [src]="'/assets/' + currentPage.imageUrl" [alt]="'Page ' + currentPage.number">
+
+        <!-- Аннотации -->
+        <div *ngFor="let annotation of annotations; trackBy: trackByAnnotationId" class="annotation"
+            [style.left.px]="annotation.position.x" [style.top.px]="annotation.position.y">
+            <div class="annotation-text">{{ annotation.text }}</div>
+            <button matMiniFab class="delete-btn" (click)="deleteAnnotation(annotation.id); $event.stopPropagation()">
+                <mat-icon aria-hidden="false" aria-label="close" fontIcon="close"></mat-icon>
+            </button>
+        </div>
+
+        <!-- Новая аннотация -->
+        <div *ngIf="isAddingAnnotation" class="annotation-form" [style.left.px]="currentPosition.x"
+            [style.top.px]="currentPosition.y">
+            <input matInput appAutoFocus [(ngModel)]="newAnnotationText" maxlength="21" placeholder="Введите аннотацию"
+                (keydown.enter)="addAnnotation()" />
+        </div>
+    </div>
+</div>
