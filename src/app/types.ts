@@ -3,6 +3,7 @@ export interface Annotation {
   text: string;
   position: { x: number; y: number };
   createdAt: Date;
+  blob?: File | null;
 }
 
 export interface Page {
