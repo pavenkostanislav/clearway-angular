@@ -10,8 +10,10 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 
 import { ViewRoutingModule } from './view-routing.module';
 import { View } from './view';
-import { AutoFocusDirective } from '../auto-focus.directive';
 import { ImageAnnotator } from './image-annotator/image-annotator';
+
+import { AutoFocusDirective } from '../auto-focus.directive';
+import { DraggableDirective } from '../draggable.directive';
 
 
 @NgModule({
@@ -30,7 +32,8 @@ import { ImageAnnotator } from './image-annotator/image-annotator';
     MatToolbarModule,
 
     ViewRoutingModule,
-    AutoFocusDirective
+    AutoFocusDirective,
+    DraggableDirective
   ]
 })
 export class ViewModule { }

@@ -4,7 +4,7 @@
         <img [src]="'/assets/' + currentPage.imageUrl" [alt]="'Page ' + currentPage.number">
 
         <!-- Аннотации -->
-        <div *ngFor="let annotation of annotations; trackBy: trackByAnnotationId" class="annotation"
+        <div *ngFor="let annotation of annotations; trackBy: trackByAnnotationId" appDraggable class="annotation"
             [style.left.px]="annotation.position.x" [style.top.px]="annotation.position.y">
             <div *ngIf="!annotation.blob" class="annotation-text">{{ annotation.text }}</div>
 
